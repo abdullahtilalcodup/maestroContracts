@@ -30,12 +30,12 @@ contract MaestrosMix is ERC721A, Ownable {
 
     uint256 public OGMinted=0;
     uint256 public WLMinted=0;
-    uint256 public publicMinted=0;
+    uint256 public publicFreeMinted=0;
     uint256 public paidMinted=0;
 
     uint256 public totalOGLimit=250;
     uint256 public totalWLLimit=500;
-    uint256 public totalPublicLimit=150;
+    uint256 public totalPublicFreeLimit=150;
     uint256 public totalPaidLimit=1000;
 
     string private baseURI;
@@ -96,7 +96,7 @@ contract MaestrosMix is ERC721A, Ownable {
                  WLMinted=WLMinted+_mintAmount;
              }
              else{
-                 publicMinted=publicMinted+_mintAmount;
+                 publicFreeMinted=publicFreeMinted+_mintAmount;
              }
 
             _safeMint(msg.sender, _mintAmount);
@@ -115,7 +115,7 @@ contract MaestrosMix is ERC721A, Ownable {
                 WLMinted=WLMinted+freeMintAvailable;
             }
              else{
-                 publicMinted=publicMinted+freeMintAvailable;
+                 publicFreeMinted=publicFreeMinted+freeMintAvailable;
              }
              
 
@@ -160,13 +160,13 @@ contract MaestrosMix is ERC721A, Ownable {
                 }
                     
             }
-            else if((mintTpe==MintType.Public&&publicMinted<totalPublicLimit)){
+            else if((mintTpe==MintType.Public&&publicFreeMinted<totalPublicFreeLimit)){
 
-                if(freeMintAvailable<totalPublicLimit-publicMinted){
+                if(freeMintAvailable<totalPublicFreeLimit-publicFreeMinted){
                     return freeMintAvailable;
                 }
                 else{
-                    return(totalPublicLimit-publicMinted);
+                    return(totalPublicFreeLimit-publicFreeMinted);
                 }
             }
             else{
@@ -294,13 +294,13 @@ contract MaestrosMix is ERC721A, Ownable {
     }
 
     
-    function setTotalLimitsOfMint(uint256 _totalOGLimit,uint256 _totalWLLimit,uint256 _totalPublicLimit)
+    function setTotalLimitsOfMint(uint256 _totalOGLimit,uint256 _totalWLLimit,uint256 _totalPublicFreeLimit)
         public
         onlyOwner
     {
         totalOGLimit=_totalOGLimit;
         totalWLLimit=_totalWLLimit;
-        totalPublicLimit=_totalPublicLimit;
+        totalPublicFreeLimit=_totalPublicFreeLimit;
     }
 
     ///@notice To set the total number of token allowed to mint in public sale per address
