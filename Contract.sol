@@ -50,7 +50,6 @@ contract MaestrosMix is ERC721A, Ownable {
     bytes32 OGRoot;
     bytes32 WLRoot;
 
-    event tokenMintedEvent();
     constructor(
         string memory _name,
         string memory _symbol,
@@ -102,7 +101,7 @@ contract MaestrosMix is ERC721A, Ownable {
 
             _safeMint(msg.sender, _mintAmount);
             tokensMintedPerWallet[msg.sender]+=_mintAmount;
-            emit tokenMintedEvent();
+           
            
 
         } else {
@@ -127,7 +126,7 @@ contract MaestrosMix is ERC721A, Ownable {
             _safeMint(msg.sender, _mintAmount);
             tokensMintedPerWallet[msg.sender]+=_mintAmount;
             paidMinted=paidMinted+paidMint;
-            emit tokenMintedEvent();
+           
         }
     }
 
