@@ -9,7 +9,6 @@ import "erc721a/contracts/ERC721A.sol";
 
 /// @title Mestro's Mix Test
 /// @author Adam Bawany
-/// @custom:experimental This is an experimental contract.
 contract MaestrosMix is ERC721A, Ownable {
 
     using Strings for uint256;
@@ -43,8 +42,7 @@ contract MaestrosMix is ERC721A, Ownable {
     string private notRevealedUri;
 
      enum MintType{ OG, WL, Public }
-    // mapping(address => bool) whitelistedAddressesO;
-    // mapping(address => bool) whitelistedAddressesL;
+
     mapping(address => uint8) tokensMintedPerWallet;
 
     bytes32 OGRoot;
@@ -305,13 +303,6 @@ contract MaestrosMix is ERC721A, Ownable {
         totalPublicFreeLimit=_totalPublicFreeLimit;
     }
 
-    ///@notice To set the total number of token allowed to mint in public sale per address
-    ///@dev set the total number of token allowed to mint in public sale per address
-    ///@param _nftPerAddressLimitPublic of type uint8 is the total number of tokens allowed to mint in public sale per address
-    // function setNftPerAddressLimitPublic(uint8 _nftPerAddressLimitPublic) public onlyOwner{
-    //     nftPerAddressLimitPublic=_nftPerAddressLimitPublic;
-    // }
-
     /// @notice Gives the base uri for tocken
     /// @dev use for the BaseUri setup at the time of initialization
     /// @return base uri of tockens on ipfs in string
@@ -436,5 +427,16 @@ contract MaestrosMix is ERC721A, Ownable {
         onlyOwner
     {
         pausePublicSale=_pausePublicSale;
+    }
+
+     /// @notice this sets the og and wl proofs
+    /// @dev this sets the og and wl proofs
+    /// @param _OGRoot _WLRoot are the merkle proofs
+    function setProofs( bytes32 _OGRoot,bytes32 _WLRoot)
+        public
+        onlyOwner
+    {
+        OGRoot=_OGRoot;
+        WLRoot=_WLRoot;
     }
 }
