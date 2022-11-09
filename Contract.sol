@@ -178,7 +178,7 @@ contract MaestrosMix is ERC721A, Ownable {
         }
     }
 
-    /// @notice It is use to allow mint for the adresses added in whitelist
+    /// @notice It is use to allow mint for the adresses added in og whitelist
     /// @dev Since we have two whitelist,we calculate there free mint avialble depending on the whitelist and call the private mint function.Cannot break further as free mints are variable to type of sale
     /// @param _mintAmount is the quantity of tocken to mint
     function OGMint(uint8 _mintAmount,bytes32[] calldata proof) preConditions(_mintAmount) public payable {
@@ -254,18 +254,18 @@ contract MaestrosMix is ERC721A, Ownable {
         return MerkleProof.verify(proof,OGRoot,leaf);
     }
 
-    /// @notice check if the address is in whitelisted og list
-    /// @dev use to check if address is in whitelisted og list
+    /// @notice check if the address is in whitelisted wl list
+    /// @dev use to check if address is in whitelisted wl list
     /// @param _user is the address of wallet to check
-    /// @return it returns the boolen,true if address exist in the whitelist og list
+    /// @return it returns the boolen,true if address exist in the whitelist wl list
     function isWalletWL(address _user,bytes32[] calldata proof) public view returns (bool) {
        bytes32 leaf=keccak256(abi.encodePacked(_user));
         return MerkleProof.verify(proof,WLRoot,leaf);
     }
 
 
-    /// @notice set the max amount of token that can be minted by a simgle wallet
-    /// @dev it is to set max amount of token that can be minted by a simgle wallet
+    /// @notice set the max amount of token that can be minted by a single wallet
+    /// @dev it is to set max amount of token that can be minted by a single wallet
     /// @param _maxMintAmountPerWallet is the new max amount that a single wallet can mint totally
     function setMaxMintAmountPerWallet(uint8 _maxMintAmountPerWallet) public onlyOwner {
         maxMintAmountPerWallet = _maxMintAmountPerWallet;
@@ -279,9 +279,9 @@ contract MaestrosMix is ERC721A, Ownable {
        
     }
     
-    ///@notice To set the total number of token allowed to mint in OG whitelist per address
-    ///@dev set the total number of token allowed to mint in OG list per address
-    ///@param _maxWLFreePerWallet of type uint8 is the total number of tokens allowed to mint in OG whitelist per address
+    ///@notice To set the total number of token allowed to mint in WL whitelist per address
+    ///@dev set the total number of token allowed to mint in WL list per address
+    ///@param _maxWLFreePerWallet of type uint8 is the total number of tokens allowed to mint in WL whitelist per address
     function setMaxWLFreePerWallet (uint8 _maxWLFreePerWallet) public onlyOwner{
         maxWLFreePerWallet=_maxWLFreePerWallet;
     }
