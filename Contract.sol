@@ -294,13 +294,14 @@ contract MaestrosMix is ERC721A, Ownable {
     }
 
     
-    function setTotalLimitsOfMint(uint256 _totalOGLimit,uint256 _totalWLLimit,uint256 _totalPublicFreeLimit)
+    function setTotalLimitsOfMint(uint256 _totalOGLimit,uint256 _totalWLLimit,uint256 _totalPublicFreeLimit,uint256 _totalPaidLimit)
         public
         onlyOwner
     {
         totalOGLimit=_totalOGLimit;
         totalWLLimit=_totalWLLimit;
         totalPublicFreeLimit=_totalPublicFreeLimit;
+        totalPaidLimit=_totalPaidLimit;
     }
 
     /// @notice Gives the base uri for tocken
